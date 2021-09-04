@@ -36,10 +36,11 @@ class Trimmer {
   /// Loads a video using the path provided.
   ///
   /// Returns the loaded video file.
-  Future<void> loadVideo({required File videoFile}) async {
+  Future<void> loadVideo({required File videoFile, required Size size}) async {
     currentVideoFile = videoFile;
     if (videoFile.existsSync()) {
-      _videoPlayerController = VideoPlayerController.file(currentVideoFile!);
+      _videoPlayerController =
+          VideoPlayerController.file(currentVideoFile!, size: size);
       await _videoPlayerController!.initialize().then((_) {
         _controller.add(TrimmerEvent.initialized);
       });
